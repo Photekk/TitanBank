@@ -15,7 +15,15 @@
 
 
 
+<%
+    String username = (String) session.getAttribute("user");
 
+    UserRepository userRepo = new UserRepository();
+    User user = userRepo.findByUserName(username);
+    
+    BankAccountRepository bankAcctRepo = new BankAccountRepository();
+    List<BankAccount> bankAccounts = bankAcctRepo.findByUser(user);
+%>
 <!DOCTYPE HTML>
 <!DOCTYPE html>
 <html>
@@ -23,11 +31,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Account Page</title>
     </head>
-    <jsp:include page="header.jsp"/>
-    <select name="Account Type" size="2">
-        <option>Checking</option>
-        <option>Savings</option>
-    </select>
     <body>
         
     </body>

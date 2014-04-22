@@ -48,10 +48,4 @@
     <welcome-file-list>
         <welcome-file>redirect.jsp</welcome-file>
     </welcome-file-list>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/WEB-INF/error_404.jsp</location>
-    </error-page>
-    <jsp-config>
-    </jsp-config>
 </web-app>

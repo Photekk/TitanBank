@@ -53,21 +53,30 @@ public class AuthenticationServlet extends HttpServlet {
             Customer c = authenticator.login(userName, pwd);
             HttpSession session = request.getSession();
             session.setAttribute("user", userName);
-            session.setAttribute("status", true);
-// 
+//            session.setAttribute("pass", pwd);
+//            session.setAttribute("cust", c);
             
-            loginResultMsg = "/WEB-INF/welcome.jsp";   
-            RequestDispatcher dispatcher =
-                    getServletContext().getRequestDispatcher(loginResultMsg);
+            loginResultMsg = "/welcome.jsp";   //"You are logged in " + " " + session.getAttribute("user");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(loginResultMsg);
             dispatcher.forward(request, response);
         } catch (UserNotFoundException | InvalidPasswordException ex) {
-            loginResultMsg = "/WEB-INF/invalid";
-            RequestDispatcher dispatcher =
-                    getServletContext().getRequestDispatcher(loginResultMsg);
-            dispatcher.forward(request, response);
+            loginResultMsg = "Invalid Username or Password. Please Try Again.";
         }
         
-        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Titan Bank</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>" + loginResultMsg +"</h1>");
+            out.println("<br><br>");
+            //out.println("<form action="thedecider.jsp " method="post">");
+            out.println("</body>");
+            out.println("</html>"); 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
